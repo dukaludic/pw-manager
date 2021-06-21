@@ -1,8 +1,8 @@
-import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import MainNav from "./components/MainNav";
-import PasswordItem from "./components/PasswordItem";
-import NewPassword from "./components/NewPassword";
+import Passwords from "./components/Passwords";
+import Home from "./components/Home";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
   const DUMMY_LOGINS = [
@@ -25,19 +25,13 @@ function App() {
 
   return (
     <div>
-      <MainNav />
-      <Switch>
-        <Route path="/" exact>
-          <p>Log in</p>
-        </Route>
-        <Route path="/profile"></Route>
-        <Route path="/password">
-          <PasswordItem title={DUMMY_LOGINS[0].title} />
-          <PasswordItem title={DUMMY_LOGINS[1].title} />
-          <PasswordItem title={DUMMY_LOGINS[2].title} />
-          <NewPassword />
-        </Route>
-      </Switch>
+      <div className="appContainer">
+        <MainNav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/passwords" component={Passwords} />
+        </Switch>
+      </div>
     </div>
   );
 }
