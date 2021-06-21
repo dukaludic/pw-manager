@@ -5,13 +5,14 @@ import React, { useState } from "react";
 const PasswordItem = (props) => {
   const [shownPassword, setShownPassword] = useState("••••••••••");
   const [revealBtnTxt, setRevealBtnTxt] = useState("Reveal");
-  const password = "123hello";
+  // const password = props.password;
   const [isOpen, setIsOpen] = useState(false);
   // let revealBtnTxt = "Reveal";
+  console.log(props.password);
 
   const revealHide = () => {
     shownPassword === "••••••••••"
-      ? setShownPassword(password)
+      ? setShownPassword(props.password)
       : setShownPassword("••••••••••");
 
     revealBtnTxt === "Reveal"

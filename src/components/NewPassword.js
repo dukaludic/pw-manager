@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewPassword = () => {
+const NewPassword = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredPw, setEnteredPw] = useState("");
@@ -20,12 +20,12 @@ const NewPassword = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const expenseData = {
+    const loginData = {
       title: enteredTitle,
       password: enteredPw,
     };
 
-    console.log(expenseData);
+    props.onAddLoginData(loginData);
     setEnteredPw("");
     setEnteredTitle("");
   };
