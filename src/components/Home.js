@@ -1,7 +1,12 @@
 import "./Home.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
+  // const { user } = useAuth0();
+  // console.log(user);
   const name = "Luka";
+
+  //Treba malo logike za name i user
 
   return (
     <div>

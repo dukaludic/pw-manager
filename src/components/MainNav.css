@@ -17,6 +17,7 @@
   padding: 30px;
   font-size: 25px;
   text-decoration: none;
+  align-items: center;
 }
 
 .menuItem i {
@@ -36,4 +37,10 @@ hr {
 .menuItem:hover {
   background-color: #36424b;
   transition: all 0.4s;
+}
+
+.menuBtn {
+  background-color: #2d373e;
+  border: none;
+  width: 100%;
 }
