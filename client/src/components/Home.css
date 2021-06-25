@@ -1,0 +1,19 @@
+.welcome {
+  margin: 40px 60px;
+  color: #576671;
+  animation: fadein 2s;
+}
+
+.welcomeTxt {
+  margin-left: 60px;
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
