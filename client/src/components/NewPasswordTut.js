@@ -9,51 +9,60 @@ class NewPasswordTut extends Component {
              title: '',
              username: '',
              password: '',
+             isOpen: false,
         }
-
     }
 
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    loadPw = () => {
-        fetch('/api/passwords')
-        .then(res => res.json())
-        .then(passwords => this.setState({passwords}, () => console.log('Passwords fetched...', passwords)))
-    }
-
     submitHandler = (e) => {
         e.preventDefault();
+        delete this.state.isOpen;
         console.log(this.state)
         
+
         axios.post('/api/passwords', this.state)
-        .then(response => {
-            console.log(response)
+        .then(() => {
+            this.props.loadPasswords();
+        })
+        .then(() => {
+            console.log(this.state)
         })
         .catch(error => {
             console.log(error)
         })
 
-        this.loadPw()
+        this.setState({title: ''})
+        this.setState({username: ''})
+        this.setState({password: ''})
+
+        this.clickHandler();
     }
+
+    clickHandler = () => {
+        this.state.isOpen === false ? this.setState({isOpen: true}) : this.setState({isOpen: false})
+    }
+
     
     render() {
-        const {title, username, password} = this.state
+        const {title, username, password} = this.state;
         return (
             <div>
-                <form onSubmit={this.submitHandler}>
-                    <div>
-                    <input type='text' name="title" value={title} onChange={this.changeHandler}/>
-                    </div>
-                    <div>
-                    <input type='text' name="username" value={username} onChange={this.changeHandler}/>
-                    </div>
-                    <div>
-                    <input type='text' name="password" value={password} onChange={this.changeHandler}/>
-                    </div>
-                <button type="submit">Submit</button>
-                </form>
+                {!this.state.isOpen && <button onClick={this.clickHandler} className="addBtn">Add</button>}
+                {this.state.isOpen && <form className="addForm" onSubmit={this.submitHandler}>
+                
+                    <input className="input" type='text' name="title" placeholder="Title" value={title} onChange={this.changeHandler}/>
+                
+                    <input className="input" type='text' name="username" placeholder="Username" value={username} onChange={this.changeHandler}/>
+                
+                    <input className="input" type='text' name="password" placeholder="Password" value={password} onChange={this.changeHandler}/>
+                <div className="actions">   
+                <button className="addBtn" type="submit">Submit</button>
+                <button onClick={this.clickHandler} className="addBtn">Cancel</button>
+                </div>
+                </form>}
             </div>
         )
     }

@@ -15,6 +15,7 @@ class Passwords extends Component {
     }
   }
 
+
   loadPasswords = () => {
     fetch('/api/passwords')
     .then(res => res.json())
@@ -31,7 +32,7 @@ class Passwords extends Component {
     <div className="pwComponentWhole">
       {/* <button onClick={fetchPasswords}>FETCH</button> */}
       <h1 className="pwTitle">Passwords</h1>
-      <div loadPw={this.loadPasswords} className="pwContainer">
+      <div className="pwContainer">
         <div className="pwHeadingsContainer">
           <p>Title</p>
           <p>Username</p>
@@ -41,7 +42,7 @@ class Passwords extends Component {
         <hr></hr>
       </div>
       {this.state.passwords.map(passwords => <PasswordItem title={passwords.title} username={passwords.username} password={passwords.password}/>)}
-      <NewPasswordTut/>
+      <NewPasswordTut  loadPasswords={this.loadPasswords}/>
       {/* <NewPassword /> */}
     </div>
   );}
