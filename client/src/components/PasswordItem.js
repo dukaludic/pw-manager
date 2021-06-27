@@ -16,6 +16,20 @@ const PasswordItem = (props) => {
       : setRevealBtnTxt("Reveal");
   };
 
+  const deleteHandler = (e) => {
+    e.preventdefault();
+
+    fetch("http://localhost:5000/api/passwords", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: this.state.title,
+        username: this.state.username,
+        password: this.state.password,
+      }),
+    });
+  };
+
   return (
     <div>
       <div className="pwContainer">
@@ -23,9 +37,14 @@ const PasswordItem = (props) => {
           <p>{props.title}</p>
           <p>{props.username}</p>
           <p>{shownPassword}</p>
-          <button onClick={revealHide} className="revealBtn">
-            {revealBtnTxt}
-          </button>
+          <div>
+            <button onClick={revealHide} className="revealBtn">
+              {revealBtnTxt}
+            </button>
+            <button onClick={deleteHandler} className="revealBtn delete">
+              Delete
+            </button>
+          </div>
         </div>
         <hr></hr>
       </div>

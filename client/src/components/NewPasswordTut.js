@@ -6,6 +6,7 @@ class NewPasswordTut extends Component {
     super(props);
 
     this.state = {
+      id: 1,
       title: "",
       username: "",
       password: "",
@@ -26,6 +27,7 @@ class NewPasswordTut extends Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        id: this.state.id,
         title: this.state.title,
         username: this.state.username,
         password: this.state.password,
@@ -41,18 +43,6 @@ class NewPasswordTut extends Component {
       .catch((error) => {
         console.log(error);
       });
-
-    // axios
-    //   .post("/api/passwords", this.state)
-    //   .then(() => {
-    //     return this.props.loadPasswords();
-    //   })
-    //   .then(() => {
-    //     console.log(this.state);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
 
     this.setState({ title: "" });
     this.setState({ username: "" });

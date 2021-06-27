@@ -47,6 +47,7 @@ class Passwords extends Component {
         </div>
         {this.state.passwords.map((passwords) => (
           <PasswordItem
+            key={passwords.id}
             title={passwords.title}
             username={passwords.username}
             password={passwords.password}
