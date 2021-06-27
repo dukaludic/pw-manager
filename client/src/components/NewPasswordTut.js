@@ -1,71 +1,122 @@
-import React, {Component} from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 class NewPasswordTut extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             title: '',
-             username: '',
-             password: '',
-             isOpen: false,
-        }
-    }
+  constructor(props) {
+    super(props);
 
-    changeHandler = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-    }
+    this.state = {
+      title: "",
+      username: "",
+      password: "",
+      isOpen: false,
+    };
+  }
 
-    submitHandler = (e) => {
-        e.preventDefault();
-        delete this.state.isOpen;
-        console.log(this.state)
-        
+  changeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-        axios.post('/api/passwords', this.state)
-        .then(() => {
-            this.props.loadPasswords();
-        })
-        .then(() => {
-            console.log(this.state)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+  submitHandler = (e) => {
+    e.preventDefault();
+    // delete this.state.isOpen;
+    // console.log(this.state);
+    console.log("pre fetch");
+    fetch("http://localhost:5000/api/passwords", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: this.state.title,
+        username: this.state.username,
+        password: this.state.password,
+      }),
+    })
+      .then((res) => {
+        console.log("post succesfull", res);
+        return this.props.loadPasswords();
+      })
+      .then(() => {
+        console.log(this.state);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-        this.setState({title: ''})
-        this.setState({username: ''})
-        this.setState({password: ''})
+    // axios
+    //   .post("/api/passwords", this.state)
+    //   .then(() => {
+    //     return this.props.loadPasswords();
+    //   })
+    //   .then(() => {
+    //     console.log(this.state);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-        this.clickHandler();
-    }
+    this.setState({ title: "" });
+    this.setState({ username: "" });
+    this.setState({ password: "" });
 
-    clickHandler = () => {
-        this.state.isOpen === false ? this.setState({isOpen: true}) : this.setState({isOpen: false})
-    }
+    this.clickHandler();
+  };
 
-    
-    render() {
-        const {title, username, password} = this.state;
-        return (
-            <div>
-                {!this.state.isOpen && <button onClick={this.clickHandler} className="addBtn">Add</button>}
-                {this.state.isOpen && <form className="addForm" onSubmit={this.submitHandler}>
-                
-                    <input className="input" type='text' name="title" placeholder="Title" value={title} onChange={this.changeHandler}/>
-                
-                    <input className="input" type='text' name="username" placeholder="Username" value={username} onChange={this.changeHandler}/>
-                
-                    <input className="input" type='text' name="password" placeholder="Password" value={password} onChange={this.changeHandler}/>
-                <div className="actions">   
-                <button className="addBtn" type="submit">Submit</button>
-                <button onClick={this.clickHandler} className="addBtn">Cancel</button>
-                </div>
-                </form>}
+  clickHandler = () => {
+    this.state.isOpen === false
+      ? this.setState({ isOpen: true })
+      : this.setState({ isOpen: false });
+  };
+
+  render() {
+    const { title, username, password } = this.state;
+    return (
+      <div>
+        {!this.state.isOpen && (
+          <button onClick={this.clickHandler} className="addBtn">
+            Add
+          </button>
+        )}
+        {this.state.isOpen && (
+          <form className="addForm" onSubmit={this.submitHandler}>
+            <input
+              className="input"
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={title}
+              onChange={this.changeHandler}
+            />
+
+            <input
+              className="input"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={this.changeHandler}
+            />
+
+            <input
+              className="input"
+              type="text"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={this.changeHandler}
+            />
+            <div className="actions">
+              <button className="addBtn" type="submit">
+                Submit
+              </button>
+              <button onClick={this.clickHandler} className="addBtn">
+                Cancel
+              </button>
             </div>
-        )
-    }
+          </form>
+        )}
+      </div>
+    );
+  }
 }
 
 export default NewPasswordTut;
