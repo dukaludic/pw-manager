@@ -17,15 +17,11 @@ const PasswordItem = (props) => {
   };
 
   const deleteHandler = (e) => {
-    e.preventdefault();
-
-    fetch("http://localhost:5000/api/passwords", {
+    fetch("http://localhost:5000/api/passwords/", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: this.state.title,
-        username: this.state.username,
-        password: this.state.password,
+        id: 1,
       }),
     });
   };

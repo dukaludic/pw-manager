@@ -5,7 +5,7 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <button className="menuItem menuBtn" onClick={() => loginWithRedirect()}>
-      <i class="fas fa-sign-in-alt"></i>
+      <i className="fas fa-sign-in-alt"></i>
       <p>Log In</p>
     </button>
   );

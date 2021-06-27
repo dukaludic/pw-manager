@@ -11,11 +11,11 @@ const MainNav = () => {
     <div className="menuContainer">
       <h1 className="logo">SafeLog</h1>
       <NavLink to="/" className="menuItem">
-        <i class="fas fa-user"></i>
+        <i className="fas fa-user"></i>
         <p>Home</p>
       </NavLink>
       <NavLink to="/Passwords" className="menuItem">
-        <i class="fas fa-key"></i>
+        <i className="fas fa-key"></i>
         <p>Passwords</p>
       </NavLink>
       <hr className="hr"></hr>

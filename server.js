@@ -32,4 +32,16 @@ app.post("/api/passwords", (req, res) => {
   res.status(200).send();
 });
 
+app.delete("/api/passwords", (req, res) => {
+  const passwordsData = JSON.parse(fs.readFileSync("passwords.json"));
+  const reqData = req.body;
+  console.log(reqData.id);
+  console.log(passwordsData.passwords[0].id);
+  for (let i = 0; i < passwordsData.passwords.length; i++) {
+    if (passwordsData.passwords[i].id === reqData.id) {
+      delete passwordsData.passwords[i];
+    }
+  }
+});
+
 app.listen(port, () => console.log(`Server started on port ${port}`));

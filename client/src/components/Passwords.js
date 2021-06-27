@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Passwords.css";
 import PasswordItem from "./PasswordItem";
 import NewPassword from "./NewPassword";
-import NewPasswordTut from "./NewPasswordTut";
 
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "./Loading";
@@ -45,16 +44,15 @@ class Passwords extends Component {
           </div>
           <hr></hr>
         </div>
-        {this.state.passwords.map((passwords) => (
+        {this.state.passwords.map((passwords, index) => (
           <PasswordItem
-            key={passwords.id}
+            key={index}
             title={passwords.title}
             username={passwords.username}
             password={passwords.password}
           />
         ))}
-        <NewPasswordTut loadPasswords={this.loadPasswords} />
-        {/* <NewPassword /> */}
+        <NewPassword loadPasswords={this.loadPasswords} />
       </div>
     );
   }
