@@ -1,0 +1,16 @@
+{
+  "passwords": [
+    {
+      "id": 1,
+      "title": "Facebook",
+      "username": "hello",
+      "password": "world123123"
+    },
+    {
+      "id": 2,
+      "title": "Twitter",
+      "username": "hello3",
+      "password": "world123"
+    }
+  ]
+}

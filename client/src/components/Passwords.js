@@ -29,6 +29,10 @@ class Passwords extends Component {
     this.loadPasswords();
   }
 
+  // componentDidUpdate() {
+  //   this.loadPasswords();
+  // }
+
   // console.log(props);
   render() {
     return (
@@ -46,13 +50,14 @@ class Passwords extends Component {
         </div>
         {this.state.passwords.map((passwords, index) => (
           <PasswordItem
+            loadPasswords={this.loadPasswords}
             key={index}
             title={passwords.title}
             username={passwords.username}
             password={passwords.password}
           />
         ))}
-        <NewPassword loadPasswords={this.loadPasswords} />
+        <NewPassword />
       </div>
     );
   }

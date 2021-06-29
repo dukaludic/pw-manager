@@ -32,16 +32,25 @@ app.post("/api/passwords", (req, res) => {
   res.status(200).send();
 });
 
-app.delete("/api/passwords", (req, res) => {
+app.delete("/api/passwords/:id", (req, res) => {
   const passwordsData = JSON.parse(fs.readFileSync("passwords.json"));
-  const reqData = req.body;
-  console.log(reqData.id);
-  console.log(passwordsData.passwords[0].id);
-  for (let i = 0; i < passwordsData.passwords.length; i++) {
-    if (passwordsData.passwords[i].id === reqData.id) {
-      delete passwordsData.passwords[i];
+  const id = req.params.id;
+  console.log("You requested ", id);
+
+  const deleted = passwordsData.passwords.find((password) => password.id == id);
+
+  passwordsData.passwords = passwordsData.passwords.filter(
+    (password) => password.id != id
+  );
+
+  console.log(passwordsData.passwords);
+
+  fs.writeFileSync("passwords.json", JSON.stringify(passwordsData), (err) => {
+    if (err) {
+      console.log(err);
     }
-  }
+  });
+  res.status(200).send();
 });
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
