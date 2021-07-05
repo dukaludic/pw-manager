@@ -16,10 +16,14 @@ const PasswordItem = (props) => {
       : setRevealBtnTxt("Reveal");
   };
 
-  const deleteHandler = (e) => {
-    fetch("http://localhost:5000/api/passwords/2", {
+  const deleteHandler = (id) => {
+    //e.target.
+    fetch(`http://localhost:5000/api/passwords/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
+    }).then((res) => {
+      res.json();
+      console.log(res);
     });
   };
 
@@ -36,7 +40,10 @@ const PasswordItem = (props) => {
             <button onClick={revealHide} className="revealBtn">
               {revealBtnTxt}
             </button>
-            <button onClick={deleteHandler} className="revealBtn delete">
+            <button
+              onClick={() => deleteHandler(props.id)}
+              className="revealBtn delete"
+            >
               Delete
             </button>
           </div>

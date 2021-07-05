@@ -21,8 +21,6 @@ class NewPassword extends Component {
 
   submitHandler = (e) => {
     e.preventDefault();
-    // delete this.state.isOpen;
-    // console.log(this.state);
     console.log("pre fetch");
     fetch("http://localhost:5000/api/passwords", {
       method: "POST",
@@ -35,8 +33,8 @@ class NewPassword extends Component {
       }),
     })
       .then((res) => {
+        this.props.callPasswords();
         console.log("post succesfull", res);
-        return this.props.loadPasswords();
       })
       .catch((error) => {
         console.log(error);
@@ -67,7 +65,7 @@ class NewPassword extends Component {
           </button>
         )}
         {this.state.isOpen && (
-          <form className="addForm" onSubmit={this.submitHandler}>
+          <form className="addForm">
             <input
               className="input"
               type="text"
@@ -83,7 +81,7 @@ class NewPassword extends Component {
               name="username"
               placeholder="Username"
               value={username}
-              onChange={this.changeHandler}
+              onChange={() => this.changeHandler}
             />
 
             <input
@@ -92,13 +90,17 @@ class NewPassword extends Component {
               name="password"
               placeholder="Password"
               value={password}
-              onChange={this.changeHandler}
+              onChange={() => this.changeHandler}
             />
             <div className="actions">
-              <button className="addBtn" type="submit">
+              <button
+                onClick={() => this.submitHandler}
+                className="addBtn"
+                type="submit"
+              >
                 Submit
               </button>
-              <button onClick={this.clickHandler} className="addBtn">
+              <button onClick={() => this.clickHandler} className="addBtn">
                 Cancel
               </button>
             </div>

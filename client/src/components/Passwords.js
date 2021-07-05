@@ -20,7 +20,7 @@ class Passwords extends Component {
       .then((res) => res.json())
       .then((passwords) =>
         this.setState({ passwords }, () =>
-          console.log("Passwords fetched...", passwords)
+          console.log("Passwords fetched... Passwords.js", passwords)
         )
       );
   };
@@ -28,9 +28,15 @@ class Passwords extends Component {
   componentDidMount() {
     this.loadPasswords();
   }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   // console.log(this.state.passwords);
+  //   // console.log(prevState.passwords);
+  //   if (this.state.passwords.length) {
+  //     this.loadPasswords();
+  //   }
 
-  // componentDidUpdate() {
-  //   this.loadPasswords();
+  //   // console.log(this.state.passwords);
+  //   // console.log(prevState.passwords);
   // }
 
   // console.log(props);
@@ -50,14 +56,14 @@ class Passwords extends Component {
         </div>
         {this.state.passwords.map((passwords, index) => (
           <PasswordItem
-            loadPasswords={this.loadPasswords}
             key={index}
+            id={index}
             title={passwords.title}
             username={passwords.username}
             password={passwords.password}
           />
         ))}
-        <NewPassword />
+        <NewPassword callPasswords={() => this.loadPasswords()} />
       </div>
     );
   }
