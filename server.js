@@ -37,11 +37,13 @@ app.delete("/api/passwords/:id", (req, res) => {
   const id = req.params.id;
   console.log("You requested ", id);
 
-  const deleted = passwordsData.passwords.find((password) => password.id == id);
+  const deleted = passwordsData.passwords.find((item) => item.id == id);
 
   passwordsData.passwords = passwordsData.passwords.filter(
     (password) => password.id != id
   );
+
+  //axios, array methode u js, obavezno ES6/7,
 
   console.log(passwordsData.passwords);
 
